@@ -1,5 +1,4 @@
 const wrapper = document.querySelector('.wrapper');
-let isMoreContentThanViewport = false
 
 const pageSliderOptions = {
    wrapperClass: "page__wrapper",
@@ -37,17 +36,17 @@ const pageSliderOptions = {
 
    speed: 800,
 
-   // //обновить слайдер,
-   // //при изменени элементов слайдера
-   // observer: true,
+   //обновить слайдер,
+   //при изменени элементов слайдера
+   observer: true,
 
-   //    //обновить слайдер,
-   // //при изменени родительских элементов слайдера
-   // observeParents: true,
+   //обновить слайдер,
+   //при изменени родительских элементов слайдера
+   observeParents: true,
 
-   //       //обновить слайдер,
-   // //при изменени дочерних элементов слайдера
-   // observeSlideChildren: true,
+   //обновить слайдер,
+   //при изменени дочерних элементов слайдера
+   observeSlideChildren: true,
 
    on: {
       init: function(){
@@ -120,7 +119,8 @@ function setScrollType(){
 
       wrapper.classList.remove('_free');
 
-      isMoreContentVieport = true
+      pageSlider.params.freeMode.enabled = false
+
    }
 
 
@@ -134,40 +134,17 @@ function setScrollType(){
          if(pageSlideContentHeight > window.innerHeight){
             wrapper.classList.add('_free');
             
-            isMoreContentVieport = false
+            // isMoreContentVieport = false
+            pageSlider.params.freeMode.enabled = true
 
             break;
          }
       }
       
    }
-   // pageSlider.slides.forEach(pageSlide => {
-   //    const pageSlideContent = pageSlide.querySelector('.screen__content');
-
-      // if(pageSlideContent){
-      //    const pageSlideContentHeight = pageSlideContent.offsetHeight;
-      //    if(pageSlideContentHeight > window.innerHeight){
-      //       wrapper.classList.add('_free');
-      //       pageSlider.params.freeMode = true
-
-      //       return
-      //    }
-      // }
-   // })
 }
 
 
 
-function refreshSlider () {
-   pageSlider.destroy()
-
-   pageSliderOptions.freeMode = !isMoreContentThanViewport
-
-   pageSlider = new Swiper('.page', pageSliderOptions)
-
-   pageSlider.init()
-}
-
-window.addEventListener('resize', refreshSlider)
 
 document.addEventListener('DOMContentLoaded', () => pageSlider.init())
